@@ -1,6 +1,6 @@
 ---
 title: "BEE 4750/5750 Homework 0"
-author: "Your name here (your netID here)"
+author: "Katrina Chen (KC778)"
 date: `j import Dates; Dates.Date(Dates.now())`
 weave_options:
   term: true
@@ -19,33 +19,131 @@ Pkg.instantiate()
 # Problem 1
 
 ## Problem 1.1
+```julia; echo = false;
+function square_number(x)
+    output = x^2
+    return output
+end
+```
 
 ## Problem 1.2
+```julia; echo = false;
+"We can see that $5^2 =$`j square_number(5)`."
+```
 
 ## Problem 1.3
+```julia; echo = false;
+import Pkg
+Pkg.add("Plots")
+using Plots
+
+y = square_number
+plot(y, -10, 10, ylabel="x^2", xlabel="x", legend=FALSE)
+```
 
 # Problem 2
 
 ## Problem 2.1
+```julia; echo = false;
+"If we are trying to find $\sqrt{x}$as a, we know we have the function f(x) = $\sqrt{x}$- a"
+"The initial guess will be a_0, and there will be a point (a_0, f(a_0))"
+"At that point, the equation of the tangent line will be 2 * a_0 = (${(a_0)}^2$- a) / (a_0 - x)"
+"The intersection with the horizontal axis will be 2 * a_0 * x - (${(a_0)}^2$+ a) = 0"
+"This makes the new guess 0.5 * (a_0 + a / a_0) and after repeating a few times, you should be able to get the correct square root"
+```
 
 ## Problem 2.2
+```julia; echo = false;
+function newton_sqrt(x, a)
+  root = 0.5 * (x + (a/x))
+  while abs(root-x) > 0.01
+    if abs(root-x) <= 0.01
+      a = root
+    elseif abs(root-x) > 0.01
+      a = root
+      root = 0.5 * (x + (a/x))
+    end
+  end
+  return a
+end
+  
+newton_sqrt(2, 5)
+```
 
 # Problem 3
 
 ## Problem 3.1
+```julia; echo = false;
+r_vect = rand(20)
+```
 
 ## Problem 3.2
+```julia; echo = false;
+function mean(r_vect)
+  total = 0
+  n = 0
+  while n < lenght(r_vect)
+    total = total + r_vect[n]
+    n += 1
+  end
+  mean = total / lenght(r_vect)
+  return mean
+end
+
+function demean!(r_vect)
+  r_vect = zeros(length(r_vect))
+  for i in 1:lenght(r_vect)
+    r_vect[i] -= mean(r_vect)
+  end
+  return demean
+end
+```
 
 ## Problem 3.3
+```julia; echo = false;
+vect = [0, 0, 1, 1, 1, 1, 1, 1, 0, 0]
+```
 
 ## Problem 3.4
+```julia; echo = false;
+r_matrix = rand(5,5)
+```
 
 # Problem 4
 
 ## Problem 4.1
+```julia; echo = false;
+import Pkg
+Pkg.add("Distributions")
+Pkg.activate(".")
+Pkg.instantiate()
+using Distributions
+
+my_normal_dist = Normal(3.5, 1)
+rand(my_normal_dist)
+rand(my_normal_dist, 100)
+
+my_log_normal_dist = 
+
+```
 
 ## Problem 4.2
+```julia; echo = false;
+
+
+```
 
 ## Problem 4.3
+```julia; echo = false;
+
+
+```
 
 # References
+
+
+```julia; echo = false;
+Pkg.add("Weave")
+include("compile_report.jl")
+compile_report("\HW0-KATRINACHEN5\solution-template.jmd", "html")
+'''
