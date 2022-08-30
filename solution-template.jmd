@@ -16,9 +16,9 @@ Pkg.activate(".")
 Pkg.instantiate()
 ```
 
-```julia; echo = false;
+```julia;
 include("compile_report.jl")
-compile_report("hw0-katrinachen5/solution-template.jmd", "html")
+compile_report("solution-template.jmd", "html")
 '''
 
 # Problem 1
@@ -47,7 +47,7 @@ end
 
 x = LinRange(-10,10,21)
 
-plot(x, y)
+plot(x, y, ylabel="x^2", xlabel="x", legend=false)
 
 ```
 
@@ -65,10 +65,10 @@ This makes the new guess 0.5 * (a_0 + a / a_0) and after repeating a few times, 
 ```julia; echo = false;
 function newton_sqrt(x, a)
   root = 0.5 * (x + (a/x))
-  while abs(root-x) > 0.01
-    if abs(root-x) <= 0.01
+  while abs(root-x) > 0.1
+    if abs(root-x) <= 0.1
       a = root
-    elseif abs(root-x) > 0.01
+    elseif abs(root-x) > 0.1
       a = root
       root = 0.5 * (x + (a/x))
     end
@@ -128,13 +128,30 @@ Pkg.activate(".")
 Pkg.instantiate()
 using Distributions
 
-my_log_normal_dist = 
-
+μ = log(0.03)
+σ = 0.005
+LogNormal_dist = LogNormal(μ, σ)
+drawing = rand(LogNormal_dist, 100)
 ```
 
 ## Problem 4.2
 ```julia; echo = false;
 
+function phosphrus(a, y_t, b, q, T, x_0)
+  x_t = zeros(length(T))
+  n = 1
+  
+  for n in length(T)
+    if n == 1
+      x_t[n] = x_0
+      n += 1
+    else
+      x_t[n] = x_t[n-1] + a + y_t + ((x_t[n-1]^q) / (1 + (x_t[n-1]^q))) - b * x_t[n-1]
+      n += 1
+    end
+  end
+  return x_t
+end
 
 ```
 
