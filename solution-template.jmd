@@ -131,7 +131,7 @@ using Distributions
 μ = log(0.03)
 σ = 0.005
 LogNormal_dist = LogNormal(μ, σ)
-drawing = rand(LogNormal_dist, 100)
+samples = rand(LogNormal_dist, 100)
 ```
 
 ## Problem 4.2
@@ -146,7 +146,7 @@ function phosphrus(a, y_t, b, q, T, x_0)
       x_t[n] = x_0
       n += 1
     else
-      x_t[n] = x_t[n-1] + a + y_t + ((x_t[n-1]^q) / (1 + (x_t[n-1]^q))) - b * x_t[n-1]
+      x_t[n] = x_t[n-1] + a + y_t[n] + ((x_t[n-1]^q) / (1 + (x_t[n-1]^q))) - b * x_t[n-1]
       n += 1
     end
   end
@@ -157,7 +157,14 @@ end
 
 ## Problem 4.3
 ```julia; echo = false;
+import Pkg
+Pkg.add("Plots")
+using Plots
 
+x = 1:100
+y = phosphrus(0.4, samples, 0.42, 2, 100, 0)
+
+plot(x, y, xlabel="Phosphorus Levels", ylabel="Time", legend=false)
 
 ```
 
