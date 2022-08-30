@@ -18,7 +18,7 @@ Pkg.instantiate()
 
 ```julia;
 include("compile_report.jl")
-compile_report("solution-template.jmd", "html")
+compile_report("hw0-katrinachen5\solution-template.jmd", "html")
 '''
 
 # Problem 1
