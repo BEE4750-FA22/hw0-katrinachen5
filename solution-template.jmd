@@ -169,5 +169,5 @@ plot(x, y, xlabel="Phosphorus Levels", ylabel="Time", legend=false)
 ```
 
 # References
-
+https://juliastats.org/Distributions.jl/stable/, Stackoverflow
 
