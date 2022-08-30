@@ -16,6 +16,11 @@ Pkg.activate(".")
 Pkg.instantiate()
 ```
 
+```julia; echo = false;
+include("compile_report.jl")
+compile_report("hw0-katrinachen5/solution-template.jmd", "html")
+'''
+
 # Problem 1
 
 ## Problem 1.1
@@ -27,7 +32,7 @@ end
 ```
 
 ## Problem 1.2
-We can see that $5^2 =$ `j square_number(5)`
+We can see that $5^2 =$ `j square_number(5)`.
 
 ## Problem 1.3
 ```julia; echo = false;
@@ -123,10 +128,6 @@ Pkg.activate(".")
 Pkg.instantiate()
 using Distributions
 
-my_normal_dist = Normal(3.5, 1)
-rand(my_normal_dist)
-rand(my_normal_dist, 100)
-
 my_log_normal_dist = 
 
 ```
@@ -146,8 +147,3 @@ my_log_normal_dist =
 # References
 
 
-```julia; echo = false;
-Pkg.add("Weave")
-include("compile_report.jl")
-compile_report("\HW0-KATRINACHEN5\solution-template.jmd", "html")
-'''
