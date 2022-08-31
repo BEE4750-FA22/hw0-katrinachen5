@@ -119,17 +119,14 @@ samples = rand(LogNormal_dist, 100)
 ## Problem 4.2
 ```julia; 
 
-function phosphrus(a, y_t, b, q, T, x_0)
-  x_t = zeros(length(T))
-  n = 1
+function phosphorus(a, y_t, b, q, T, x_0)
+  x_t = zeros(T)
   
-  for n in length(T)
+  for n in eachindex(x_t)
     if n == 1
       x_t[n] = x_0
-      n += 1
     else
       x_t[n] = x_t[n-1] + a + y_t[n] + ((x_t[n-1]^q) / (1 + (x_t[n-1]^q))) - b * x_t[n-1]
-      n += 1
     end
   end
   return x_t
@@ -141,8 +138,8 @@ end
 ```julia; 
 using Plots
 
-x = 1:100
-y = phosphrus(0.4, samples, 0.42, 2, 100, 0)
+x = LinRange(1,100,100)
+y = phosphorus(0.4, samples, 0.42, 2, 100, 0)
 
 plot(x, y, xlabel="Phosphorus Levels", ylabel="Time", legend=false)
 
